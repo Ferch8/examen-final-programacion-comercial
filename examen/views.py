@@ -3,8 +3,10 @@ from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib import messages
 from .forms import EstudianteForm, MateriaForm, ProfesorForm, GradoForm
 from examen.models import Estudiante, Asignacion, Materia, Profesor, Grado, Seccion
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+@login_required
 def grado_nuevo(request):
     if request.method == "POST":
         formulario = GradoForm(request.POST)
@@ -18,6 +20,7 @@ def grado_nuevo(request):
         formulario = GradoForm()
     return render(request, 'grado/new_grado.html', {'formulario': formulario})
 
+@login_required
 def estudiante_nuevo(request):
     if request.method == "POST":
         formulario = EstudianteForm(request.POST)
